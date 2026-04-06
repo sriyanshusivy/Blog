@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Travel &mdash; Sutu &amp; Cupcake</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+<style>
+  .page-hero { position:relative; padding:160px 28px 80px; text-align:center; z-index:1; background:radial-gradient(ellipse 80% 60% at 50% 50%, rgba(232,99,122,.1) 0%, transparent 70%); }
+  .ph-label { font-size:11px; letter-spacing:.3em; text-transform:uppercase; color:var(--rose); margin-bottom:16px; display:block; opacity:0; animation:rise 1s .2s ease forwards; }
+  .ph-title { font-family:'Cormorant Garamond',serif; font-size:clamp(52px,10vw,90px); font-weight:400; font-style:italic; line-height:1; opacity:0; animation:rise 1s .4s ease forwards; }
+  .ph-sub { font-size:14px; color:var(--muted); margin-top:18px; max-width:360px; margin-left:auto; margin-right:auto; line-height:1.9; opacity:0; animation:rise 1s .6s ease forwards; }
+  .ph-line { width:1px; height:60px; background:linear-gradient(to bottom,var(--rose),transparent); margin:28px auto 0; opacity:0; animation:rise 1s .8s ease forwards; }
+  main { max-width:1140px; margin:0 auto; padding:60px 28px 120px; position:relative; z-index:1; }
+  .travel-featured { display:grid; grid-template-columns:1fr 1fr; gap:0; margin-bottom:80px; border-radius:10px; overflow:hidden; border:1px solid var(--soft); }
+  .tf-img { aspect-ratio:1/1; background:linear-gradient(135deg,#2a1a10,#1a100a); display:flex; align-items:center; justify-content:center; font-size:90px; transition:transform .6s; overflow:hidden; }
+  .travel-featured:hover .tf-img { transform:scale(1.04); }
+  .tf-body { background:var(--surface); padding:52px 44px; display:flex; flex-direction:column; justify-content:center; }
+  .tf-tag-row { display:flex; gap:10px; align-items:center; margin-bottom:20px; }
+  .tf-title { font-family:'Cormorant Garamond',serif; font-size:clamp(26px,3vw,38px); line-height:1.2; font-weight:400; margin-bottom:18px; color:var(--cream); }
+  .tf-title a { color:inherit; text-decoration:none; transition:color .2s; }
+  .tf-title a:hover { color:var(--blush); }
+  .tf-excerpt { font-size:14px; color:var(--muted); line-height:1.95; margin-bottom:28px; }
+  .posts-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:28px; margin-bottom:80px; }
+  .dest-section { margin-top:20px; }
+  .dest-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:16px; }
+  .dest-card { aspect-ratio:3/4; border-radius:8px; overflow:hidden; position:relative; cursor:pointer; transition:transform .3s; }
+  .dest-card:hover { transform:scale(1.02); }
+  .dest-bg { width:100%; height:100%; display:flex; align-items:center; justify-content:center; font-size:52px; transition:transform .5s; }
+  .dest-card:hover .dest-bg { transform:scale(1.08); }
+  .dest-overlay { position:absolute; inset:0; background:linear-gradient(to top, rgba(13,6,8,.85) 30%, transparent 70%); display:flex; flex-direction:column; justify-content:flex-end; padding:20px; }
+  .dest-name { font-family:'Cormorant Garamond',serif; font-size:20px; font-style:italic; color:var(--cream); font-weight:400; }
+  .dest-count { font-size:11px; color:var(--muted); letter-spacing:.1em; margin-top:2px; }
+  @media(max-width:900px){ .travel-featured{grid-template-columns:1fr;} .tf-img{aspect-ratio:16/7;} .posts-grid{grid-template-columns:1fr 1fr;} .dest-grid{grid-template-columns:1fr 1fr;} }
+  @media(max-width:580px){ .posts-grid{grid-template-columns:1fr;} }
+</style>
+</head>
+<body>
+  <!-- CURSOR + CANVAS -->
+  <div id="cur"></div>
+  <div id="ring"></div>
+  <canvas id="hearts-canvas"></canvas>
+
+  <!-- NAV -->
+  <nav id="main-nav">
+    <a href="index.html" class="nav-logo">Sutu &amp; Cupcake</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="travel.html">Travel</a></li>
+      <li><a href="life.html">Life</a></li>
+      <li><a href="about.html">About Us</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- MOBILE MENU -->
+  <div class="mobile-menu" id="mobile-menu">
+    <button class="mobile-close" id="mobile-close">&#x2715;</button>
+    <a href="index.html">Home</a>
+    <a href="travel.html">Travel</a>
+    <a href="life.html">Life</a>
+    <a href="about.html">About Us</a>
+  </div>
+
+  <div class="page-hero">
+    <span class="ph-label">Adventures together</span>
+    <h1 class="ph-title">Travel</h1>
+    <p class="ph-sub">Every trip is a chapter. Here are all the places Sutu &amp; Cupcake have wandered.</p>
+    <div class="ph-line"></div>
+  </div>
+
+  <main>
+    <div class="travel-featured" data-aos="fade-up">
+      <div class="tf-img">&#127807;</div>
+      <div class="tf-body">
+        <div class="tf-tag-row"><span class="tag rose">Travel</span><div class="pip s">S</div><span class="post-date">April 3, 2026</span></div>
+        <h2 class="tf-title"><a href="post-hills.html">That weekend we got lost in the hills and didn&rsquo;t mind at all</a></h2>
+        <p class="tf-excerpt">No plan, just a full tank and each other. Between wrong turns and roadside chai, it became the trip we&rsquo;ll talk about forever.</p>
+        <a href="post-hills.html" class="read-btn">Read the story</a>
+      </div>
+    </div>
+
+    <div class="sec-head" data-aos="fade-up">
+      <h2 class="sec-title">More trips</h2>
+      <div class="sec-line"></div>
+      <span class="sec-count">3 stories</span>
+    </div>
+
+    <div class="posts-grid">
+      <a href="post-mountains.html" class="card" data-aos="fade-up" data-aos-delay="0">
+        <div class="card-img c3">&#127956;</div>
+        <div class="card-body">
+          <div class="card-meta"><div class="pip s">S</div><span class="tag rose">Travel</span><span class="post-date">Mar 12</span></div>
+          <h3 class="card-title">Three days in the mountains with no agenda</h3>
+          <p class="card-excerpt">We checked the weather for a week then ignored it once we arrived.</p>
+        </div>
+      </a>
+      <a href="#" class="card" data-aos="fade-up" data-aos-delay="80">
+        <div class="card-img c6">&#127754;</div>
+        <div class="card-body">
+          <div class="card-meta"><div class="pip c">C</div><span class="tag gold">Travel</span><span class="post-date">Jan 18</span></div>
+          <h3 class="card-title">The coastal town nobody warned us about</h3>
+          <p class="card-excerpt">Tiny streets, suspicious fish, and one perfect evening watching the sun melt into the sea.</p>
+        </div>
+      </a>
+      <a href="#" class="card" data-aos="fade-up" data-aos-delay="160">
+        <div class="card-img c2">&#127749;</div>
+        <div class="card-body">
+          <div class="card-meta"><div class="pip s">S</div><span class="tag rose">Travel</span><span class="post-date">Dec 25</span></div>
+          <h3 class="card-title">New Year&rsquo;s Eve in a town with no fireworks</h3>
+          <p class="card-excerpt">Just blankets, a rooftop, and watching midnight arrive quietly with the person you love most.</p>
+        </div>
+      </a>
+    </div>
+
+    <div class="dest-section" data-aos="fade-up">
+      <div class="sec-head">
+        <h2 class="sec-title">By destination</h2>
+        <div class="sec-line"></div>
+      </div>
+      <div class="dest-grid">
+        <div class="dest-card"><div class="dest-bg c3">&#127956;</div><div class="dest-overlay"><div class="dest-name">Hills</div><div class="dest-count">2 stories</div></div></div>
+        <div class="dest-card"><div class="dest-bg c6">&#127754;</div><div class="dest-overlay"><div class="dest-name">Coast</div><div class="dest-count">1 story</div></div></div>
+        <div class="dest-card"><div class="dest-bg c1">&#127749;</div><div class="dest-overlay"><div class="dest-name">City</div><div class="dest-count">1 story</div></div></div>
+        <div class="dest-card"><div class="dest-bg c5">&#127749;</div><div class="dest-overlay"><div class="dest-name">Villages</div><div class="dest-count">1 story</div></div></div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div>Made with <span class="footer-heart">&#9829;</span> by Sutu &amp; Cupcake &nbsp;&middot;&nbsp; 2026</div>
+    <ul class="footer-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="travel.html">Travel</a></li>
+      <li><a href="life.html">Life</a></li>
+      <li><a href="about.html">About Us</a></li>
+    </ul>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+  <script src="main.js"></script>
+
+</body>
+</html>

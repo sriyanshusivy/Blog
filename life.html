@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Life &mdash; Sutu &amp; Cupcake</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+<style>
+  .page-hero { position:relative; padding:160px 28px 80px; text-align:center; z-index:1; background:radial-gradient(ellipse 80% 60% at 50% 50%, rgba(232,201,122,.09) 0%, transparent 70%); }
+  .ph-label { font-size:11px; letter-spacing:.3em; text-transform:uppercase; color:var(--gold); margin-bottom:16px; display:block; opacity:0; animation:rise 1s .2s ease forwards; }
+  .ph-title { font-family:'Cormorant Garamond',serif; font-size:clamp(52px,10vw,90px); font-weight:400; font-style:italic; line-height:1; opacity:0; animation:rise 1s .4s ease forwards; }
+  .ph-sub { font-size:14px; color:var(--muted); margin-top:18px; max-width:360px; margin-left:auto; margin-right:auto; line-height:1.9; opacity:0; animation:rise 1s .6s ease forwards; }
+  .ph-line { width:1px; height:60px; background:linear-gradient(to bottom,var(--gold),transparent); margin:28px auto 0; opacity:0; animation:rise 1s .8s ease forwards; }
+  main { max-width:1140px; margin:0 auto; padding:60px 28px 120px; position:relative; z-index:1; }
+  .cat-strip { display:flex; gap:12px; margin-bottom:52px; flex-wrap:wrap; }
+  .cat-btn { padding:8px 20px; border-radius:24px; border:1px solid var(--soft); background:transparent; color:var(--muted); font-family:'Jost',sans-serif; font-size:12px; letter-spacing:.1em; cursor:pointer; transition:all .2s; }
+  .cat-btn:hover, .cat-btn.active { background:rgba(232,99,122,.15); border-color:var(--rose); color:var(--blush); }
+  .posts-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:28px; margin-bottom:80px; }
+  .quote-block { border-left:2px solid var(--rose); padding:8px 0 8px 32px; margin:60px auto; max-width:680px; }
+  .quote-block p { font-family:'Cormorant Garamond',serif; font-size:26px; font-style:italic; line-height:1.55; color:var(--cream); font-weight:400; }
+  .quote-block cite { font-size:12px; color:var(--muted); margin-top:12px; display:block; letter-spacing:.1em; }
+  @media(max-width:900px){ .posts-grid{grid-template-columns:1fr 1fr;} }
+  @media(max-width:580px){ .posts-grid{grid-template-columns:1fr;} }
+</style>
+</head>
+<body>
+  <!-- CURSOR + CANVAS -->
+  <div id="cur"></div>
+  <div id="ring"></div>
+  <canvas id="hearts-canvas"></canvas>
+
+  <!-- NAV -->
+  <nav id="main-nav">
+    <a href="index.html" class="nav-logo">Sutu &amp; Cupcake</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="travel.html">Travel</a></li>
+      <li><a href="life.html">Life</a></li>
+      <li><a href="about.html">About Us</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- MOBILE MENU -->
+  <div class="mobile-menu" id="mobile-menu">
+    <button class="mobile-close" id="mobile-close">&#x2715;</button>
+    <a href="index.html">Home</a>
+    <a href="travel.html">Travel</a>
+    <a href="life.html">Life</a>
+    <a href="about.html">About Us</a>
+  </div>
+
+  <div class="page-hero">
+    <span class="ph-label">Everyday moments</span>
+    <h1 class="ph-title">Life</h1>
+    <p class="ph-sub">The ordinary days that turn out to be anything but. Thoughts, food, routines, and love.</p>
+    <div class="ph-line"></div>
+  </div>
+
+  <main>
+    <div class="cat-strip" data-aos="fade-up">
+      <button class="cat-btn active">All</button>
+      <button class="cat-btn">Thoughts</button>
+      <button class="cat-btn">Food</button>
+      <button class="cat-btn">Love</button>
+      <button class="cat-btn">Routines</button>
+    </div>
+
+    <div class="sec-head" data-aos="fade-up">
+      <h2 class="sec-title">All posts</h2>
+      <div class="sec-line"></div>
+      <span class="sec-count">5 stories</span>
+    </div>
+
+    <div class="posts-grid">
+      <a href="post-cafe.html" class="card" data-aos="fade-up" data-aos-delay="0">
+        <div class="card-img c1">&#9749;</div>
+        <div class="card-body">
+          <div class="card-meta"><div class="pip s">S</div><span class="tag rose">Life</span><span class="post-date">Mar 28</span></div>
+          <h3 class="card-title">On finding a caf&eacute; that feels like ours</h3>
+          <p class="card-excerpt">The right light, the right corner. Sutu found it first and Cupcake never left.</p>
+        </div>
+      </a>
+      <a href="post-journal.html" class="card" data-aos="fade-up" data-aos-delay="80">
+        <div class="card-img c2">&#127800;</div>
+        <div class="card-body">
+          <div class="card-meta"><div class="pip c">C</div><span class="tag gold">Thoughts</span><span class="post-date">Mar 20</span></div>
+          <h3 class="card-title">Why Cupcake started writing things down again</h3>
+          <p class="card-excerpt">Breadcrumbs for a future version of us who might want to look back.</p>
+        </div>
+      </a>
+      <a href="post-recipe.html" class="card" data-aos="fade-up" data-aos-delay="160">
+        <div class="card-img c4">&#127836;</div>
+        <div class="card-body">
+          <div class="card-meta"><div class="pip c">C</div><span class="tag gold">Food</span><span class="post-date">Mar 5</span></div>
+          <h3 class="card-title">The recipe Cupcake makes every rainy evening</h3>
+          <p class="card-excerpt">Started as a lazy experiment, now it&rsquo;s Sutu&rsquo;s most requested meal.</p>
+        </div>
+      </a>
+      <a href="post-photos.html" class="card" data-aos="fade-up" data-aos-delay="0">
+        <div class="card-img c5">&#128247;</div>
+        <div class="card-body">
+          <div class="card-meta"><div class="pip s">S</div><span class="tag rose">Life</span><span class="post-date">Feb 22</span></div>
+          <h3 class="card-title">Learning to photograph ordinary days</h3>
+          <p class="card-excerpt">The quiet evenings are hardest to capture and most worth keeping.</p>
+        </div>
+      </a>
+      <a href="post-mornings.html" class="card" data-aos="fade-up" data-aos-delay="80">
+        <div class="card-img c6">&#127769;</div>
+        <div class="card-body">
+          <div class="card-meta"><div class="pip c">C</div><span class="tag gold">Love</span><span class="post-date">Feb 14</span></div>
+          <h3 class="card-title">A love letter to slow mornings together</h3>
+          <p class="card-excerpt">No alarms. Coffee going cold. Talking about absolutely nothing important.</p>
+        </div>
+      </a>
+    </div>
+
+    <div class="quote-block" data-aos="fade-up">
+      <p>&ldquo;The most important stories are the ones we almost didn&rsquo;t think to write down.&rdquo;</p>
+      <cite>&mdash; Cupcake</cite>
+    </div>
+  </main>
+
+  <footer>
+    <div>Made with <span class="footer-heart">&#9829;</span> by Sutu &amp; Cupcake &nbsp;&middot;&nbsp; 2026</div>
+    <ul class="footer-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="travel.html">Travel</a></li>
+      <li><a href="life.html">Life</a></li>
+      <li><a href="about.html">About Us</a></li>
+    </ul>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+  <script src="main.js"></script>
+<script>
+  document.querySelectorAll('.cat-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+      this.classList.add('active');
+    });
+  });
+</script>
+</body>
+</html>

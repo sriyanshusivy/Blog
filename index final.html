@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Home &mdash; Sutu &amp; Cupcake</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+<style>
+  header {
+    position: relative; min-height: 100vh;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    text-align: center; padding: 100px 24px 80px; z-index: 1;
+  }
+  .hero-glow {
+    position: absolute; inset: 0; pointer-events: none;
+    background:
+      radial-gradient(ellipse 70% 60% at 25% 40%, rgba(232,99,122,.13) 0%, transparent 65%),
+      radial-gradient(ellipse 50% 50% at 78% 55%, rgba(232,201,122,.07) 0%, transparent 60%);
+  }
+  .hero-label { font-size:11px; letter-spacing:.3em; text-transform:uppercase; color:var(--rose); margin-bottom:24px; opacity:0; animation:rise 1s .3s ease forwards; }
+  .hero-title { font-family:'Cormorant Garamond',serif; font-size:clamp(58px,12vw,114px); line-height:.92; font-weight:400; opacity:0; animation:rise 1s .5s ease forwards; }
+  .n1 { color:var(--blush); font-style:italic; display:block; }
+  .amp { color:var(--muted); font-size:.38em; display:block; margin:8px 0; letter-spacing:.1em; }
+  .n2 { color:var(--gold); display:block; }
+  .hero-heart { font-size:30px; display:block; margin:24px auto 0; animation:heartbeat 1.4s ease-in-out infinite, rise 1s .7s ease forwards; opacity:0; }
+  .hero-sub { font-size:15px; color:var(--muted); max-width:380px; line-height:1.95; margin-top:18px; opacity:0; animation:rise 1s .9s ease forwards; }
+  .hero-avs { display:flex; align-items:center; gap:18px; margin-top:40px; opacity:0; animation:rise 1s 1.1s ease forwards; }
+  .av { width:52px; height:52px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-family:'Cormorant Garamond',serif; font-size:21px; font-weight:600; border:1.5px solid; }
+  .av.s { background:rgba(232,99,122,.15); border-color:var(--rose); color:var(--blush); }
+  .av.c { background:rgba(232,201,122,.15); border-color:var(--gold); color:var(--gold); }
+  .av-sep { font-size:12px; color:var(--muted); }
+  .scroll-hint { position:absolute; bottom:36px; left:50%; transform:translateX(-50%); display:flex; flex-direction:column; align-items:center; gap:8px; opacity:0; animation:rise 1s 1.5s ease forwards; }
+  .scroll-line { width:1px; height:44px; background:linear-gradient(to bottom,var(--rose),transparent); animation:scroll-anim 2s ease-in-out infinite; }
+  .scroll-text { font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:var(--muted); }
+  main { max-width:1140px; margin:0 auto; padding:0 28px 120px; position:relative; z-index:1; }
+  .featured { display:grid; grid-template-columns:1.1fr .9fr; gap:64px; margin-bottom:100px; align-items:center; }
+  .feat-img { position:relative; aspect-ratio:4/3; border-radius:6px; overflow:hidden; }
+  .feat-img-inner { width:100%; height:100%; background:linear-gradient(135deg,#2e1015,#1a0c18 50%,#0d1018); display:flex; align-items:center; justify-content:center; font-size:80px; transition:transform .7s; }
+  .feat-img:hover .feat-img-inner { transform:scale(1.05); }
+  .feat-img::after { content:''; position:absolute; inset:0; border:1px solid rgba(232,99,122,.2); border-radius:6px; pointer-events:none; }
+  .feat-tag-row { display:flex; align-items:center; gap:12px; margin-bottom:18px; }
+  .feat-title { font-family:'Cormorant Garamond',serif; font-size:clamp(26px,3.5vw,42px); line-height:1.2; font-weight:400; margin-bottom:18px; color:var(--cream); }
+  .feat-title a { color:inherit; text-decoration:none; transition:color .2s; }
+  .feat-title a:hover { color:var(--blush); }
+  .feat-excerpt { font-size:14px; color:var(--muted); line-height:1.95; margin-bottom:28px; }
+  .posts-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:28px; margin-bottom:100px; }
+  .love-strip { position:relative; background:linear-gradient(135deg,#1e0e14,#120814 50%,#0e0e1e); border:1px solid var(--soft); border-radius:10px; padding:64px 60px; display:flex; align-items:center; gap:52px; margin-bottom:60px; overflow:hidden; }
+  .love-strip::before { content:'\2665'; position:absolute; right:40px; top:16px; font-size:170px; color:rgba(232,99,122,.04); line-height:1; pointer-events:none; }
+  .strip-avs { display:flex; flex-shrink:0; }
+  .strip-av { width:74px; height:74px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-family:'Cormorant Garamond',serif; font-size:29px; font-weight:600; border:2px solid; }
+  .strip-av:nth-child(2) { margin-left:-22px; }
+  .strip-av.s { background:rgba(232,99,122,.15); border-color:var(--rose); color:var(--blush); }
+  .strip-av.c { background:rgba(232,201,122,.12); border-color:var(--gold); color:var(--gold); }
+  .strip-text h3 { font-family:'Cormorant Garamond',serif; font-size:30px; font-weight:400; font-style:italic; color:var(--cream); margin-bottom:14px; }
+  .strip-text p { font-size:14px; color:var(--muted); line-height:1.9; max-width:500px; }
+  .strip-cta { margin-top:22px; }
+  @media(max-width:900px){ .featured{grid-template-columns:1fr;gap:32px;} .posts-grid{grid-template-columns:1fr 1fr;} .love-strip{flex-direction:column;padding:36px 24px;gap:28px;text-align:center;} .strip-avs{justify-content:center;} }
+  @media(max-width:580px){ .posts-grid{grid-template-columns:1fr;} }
+</style>
+</head>
+<body>
+  <!-- CURSOR + CANVAS -->
+  <div id="cur"></div>
+  <div id="ring"></div>
+  <canvas id="hearts-canvas"></canvas>
+
+  <!-- NAV -->
+  <nav id="main-nav">
+    <a href="index.html" class="nav-logo">Sutu &amp; Cupcake</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="travel.html">Travel</a></li>
+      <li><a href="life.html">Life</a></li>
+      <li><a href="about.html">About Us</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- MOBILE MENU -->
+  <div class="mobile-menu" id="mobile-menu">
+    <button class="mobile-close" id="mobile-close">&#x2715;</button>
+    <a href="index.html">Home</a>
+    <a href="travel.html">Travel</a>
+    <a href="life.html">Life</a>
+    <a href="about.html">About Us</a>
+  </div>
+
+  <header>
+    <div class="hero-glow"></div>
+    <p class="hero-label">Our little world</p>
+    <h1 class="hero-title">
+      <span class="n1">Sutu</span>
+      <span class="amp">&amp;</span>
+      <span class="n2">Cupcake</span>
+    </h1>
+    <span class="hero-heart">&#9829;</span>
+    <p class="hero-sub">Two hearts, one blog. Stories we live together, written so we never forget.</p>
+    <div class="hero-avs">
+      <div class="av s">S</div>
+      <span class="av-sep">Sutu &nbsp;&#9829;&nbsp; Cupcake</span>
+      <div class="av c">C</div>
+    </div>
+    <div class="scroll-hint">
+      <div class="scroll-line"></div>
+      <span class="scroll-text">scroll</span>
+    </div>
+  </header>
+
+  <main>
+    <div class="sec-head" data-aos="fade-up">
+      <h2 class="sec-title">Featured</h2>
+      <div class="sec-line"></div>
+      <span class="sec-count">Latest story</span>
+    </div>
+
+    <div class="featured" data-aos="fade-up" data-aos-delay="80">
+      <div class="feat-img">
+        <div class="feat-img-inner">&#127807;</div>
+      </div>
+      <div>
+        <div class="feat-tag-row">
+          <span class="tag rose">Travel</span>
+          <span class="post-date">April 3, 2026</span>
+        </div>
+        <h2 class="feat-title">
+          <a href="post-hills.html">That weekend we got lost in the hills and didn&rsquo;t mind at all</a>
+        </h2>
+        <p class="feat-excerpt">No plan, just a full tank and each other. Somewhere between the second wrong turn and a roadside chai stall, it became the trip we&rsquo;ll talk about forever.</p>
+        <a href="post-hills.html" class="read-btn">Read the story</a>
+      </div>
+    </div>
+
+    <div class="sec-head" data-aos="fade-up">
+      <h2 class="sec-title">All posts</h2>
+      <div class="sec-line"></div>
+      <span class="sec-count">6 stories</span>
+    </div>
+
+    <div class="posts-grid">
+      <a href="post-cafe.html" class="card" data-aos="fade-up" data-aos-delay="0">
+        <div class="card-img c1">&#9749;</div>
+        <div class="card-body">
+          <div class="card-meta"><div class="pip s">S</div><span class="tag rose">Life</span><span class="post-date">Mar 28</span></div>
+          <h3 class="card-title">On finding a caf&eacute; that feels like ours</h3>
+          <p class="card-excerpt">Sutu found it first, then made Cupcake fall in love with it too. The right light, the right corner.</p>
+        </div>
+      </a>
+      <a href="post-journal.html" class="card" data-aos="fade-up" data-aos-delay="80">
+        <div class="card-img c2">&#127800;</div>
+        <div class="card-body">
+          <div class="card-meta"><div class="pip c">C</div><span class="tag gold">Thoughts</span><span class="post-date">Mar 20</span></div>
+          <h3 class="card-title">Why Cupcake started writing things down again</h3>
+          <p class="card-excerpt">Leaving breadcrumbs for a future version of us who might want to look back someday.</p>
+        </div>
+      </a>
+      <a href="post-mountains.html" class="card" data-aos="fade-up" data-aos-delay="160">
+        <div class="card-img c3">&#127956;</div>
+        <div class="card-body">
+          <div class="card-meta"><div class="pip s">S</div><span class="tag rose">Travel</span><span class="post-date">Mar 12</span></div>
+          <h3 class="card-title">Three days in the mountains with no agenda</h3>
+          <p class="card-excerpt">We checked the weather for a week and then ignored it the moment we arrived.</p>
+        </div>
+      </a>
+      <a href="post-recipe.html" class="card" data-aos="fade-up" data-aos-delay="0">
+        <div class="card-img c4">&#127836;</div>
+        <div class="card-body">
+          <div class="card-meta"><div class="pip c">C</div><span class="tag gold">Food</span><span class="post-date">Mar 5</span></div>
+          <h3 class="card-title">The recipe Cupcake makes every rainy evening</h3>
+          <p class="card-excerpt">Started as a lazy experiment, now it&rsquo;s the thing Sutu asks for whenever the sky goes grey.</p>
+        </div>
+      </a>
+      <a href="post-photos.html" class="card" data-aos="fade-up" data-aos-delay="80">
+        <div class="card-img c5">&#128247;</div>
+        <div class="card-body">
+          <div class="card-meta"><div class="pip s">S</div><span class="tag rose">Life</span><span class="post-date">Feb 22</span></div>
+          <h3 class="card-title">Learning to photograph ordinary days</h3>
+          <p class="card-excerpt">Memorable moments photograph themselves. The quiet evenings with Cupcake need coaxing.</p>
+        </div>
+      </a>
+      <a href="post-mornings.html" class="card" data-aos="fade-up" data-aos-delay="160">
+        <div class="card-img c6">&#127769;</div>
+        <div class="card-body">
+          <div class="card-meta"><div class="pip c">C</div><span class="tag gold">Love</span><span class="post-date">Feb 14</span></div>
+          <h3 class="card-title">A love letter to slow mornings together</h3>
+          <p class="card-excerpt">No alarms. Coffee going cold. Talking about absolutely nothing important.</p>
+        </div>
+      </a>
+    </div>
+
+    <div class="love-strip" data-aos="fade-up">
+      <div class="strip-avs">
+        <div class="strip-av s">S</div>
+        <div class="strip-av c">C</div>
+      </div>
+      <div class="strip-text">
+        <h3>Written by Sutu &amp; Cupcake, lived together</h3>
+        <p>This is our shared space for trips we take, food we cook, things we argue about, and the ordinary moments that somehow add up to something beautiful. Two voices, one little world.</p>
+        <div class="strip-cta"><a href="about.html" class="read-btn">Our story</a></div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div>Made with <span class="footer-heart">&#9829;</span> by Sutu &amp; Cupcake &nbsp;&middot;&nbsp; 2026</div>
+    <ul class="footer-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="travel.html">Travel</a></li>
+      <li><a href="life.html">Life</a></li>
+      <li><a href="about.html">About Us</a></li>
+    </ul>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+  <script src="main.js"></script>
+
+</body>
+</html>

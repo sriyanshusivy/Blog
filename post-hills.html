@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>That weekend we got lost in the hills and didn't mind at all &mdash; Sutu &amp; Cupcake</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+<style>
+  .progress-bar { position:fixed; top:0; left:0; height:2px; background:var(--rose); z-index:600; width:0%; transition:width .1s; }
+  .post-hero { max-width:780px; margin:0 auto; padding:140px 28px 0; text-align:center; position:relative; z-index:1; }
+  .post-hero-meta { display:flex; align-items:center; justify-content:center; gap:12px; margin-bottom:24px; flex-wrap:wrap; }
+  .post-title { font-family:'Cormorant Garamond',serif; font-size:clamp(34px,6vw,62px); line-height:1.12; font-weight:400; color:var(--cream); margin-bottom:28px; opacity:0; animation:rise 1s .2s ease forwards; }
+  .post-title em { font-style:italic; color:var(--blush); }
+  .post-byline { display:flex; align-items:center; justify-content:center; gap:12px; font-size:13px; color:var(--muted); margin-bottom:52px; opacity:0; animation:rise 1s .4s ease forwards; }
+  .byline-av { width:34px; height:34px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-family:'Cormorant Garamond',serif; font-size:14px; font-weight:600; border:1.5px solid; }
+  .byline-av.s { background:rgba(232,99,122,.15); border-color:var(--rose); color:var(--blush); }
+  .byline-av.c { background:rgba(232,201,122,.15); border-color:var(--gold); color:var(--gold); }
+  .post-cover { max-width:1000px; margin:0 auto 72px; padding:0 28px; position:relative; z-index:1; }
+  .post-cover-inner { width:100%; aspect-ratio:16/7; border-radius:8px; overflow:hidden; display:flex; align-items:center; justify-content:center; font-size:90px; border:1px solid var(--soft); }
+  article { max-width:680px; margin:0 auto; padding:0 28px 40px; position:relative; z-index:1; }
+  article p { font-size:17px; color:rgba(253,240,243,.78); line-height:2; margin-bottom:30px; }
+  article h2 { font-family:'Cormorant Garamond',serif; font-size:28px; font-weight:400; margin:52px 0 20px; color:var(--cream); }
+  article h2 em { font-style:italic; color:var(--blush); }
+  .pull-quote { border-left:2px solid var(--rose); margin:48px 0; padding:6px 0 6px 30px; }
+  .pull-quote p { font-family:'Cormorant Garamond',serif; font-size:24px; line-height:1.55; font-style:italic; color:var(--cream); margin:0; }
+  .inline-img { width:100%; aspect-ratio:3/2; border-radius:6px; margin:40px 0; display:flex; align-items:center; justify-content:center; font-size:60px; border:1px solid var(--soft); }
+  .post-footer { max-width:680px; margin:0 auto; padding:40px 28px; border-top:1px solid var(--soft); display:flex; align-items:center; justify-content:space-between; position:relative; z-index:1; flex-wrap:wrap; gap:20px; }
+  .post-author { display:flex; align-items:center; gap:14px; }
+  .author-av { width:48px; height:48px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-family:'Cormorant Garamond',serif; font-size:20px; font-weight:600; border:1.5px solid; }
+  .author-av.s { background:rgba(232,99,122,.15); border-color:var(--rose); color:var(--blush); }
+  .author-av.c { background:rgba(232,201,122,.15); border-color:var(--gold); color:var(--gold); }
+  .author-info strong { display:block; font-size:15px; font-weight:400; font-family:'Cormorant Garamond',serif; color:var(--cream); }
+  .author-info span { font-size:12px; color:var(--muted); }
+  .back-link { font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--rose); text-decoration:none; transition:color .2s; }
+  .back-link:hover { color:var(--blush); }
+  .related { max-width:1000px; margin:0 auto; padding:0 28px 100px; position:relative; z-index:1; }
+  .related-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
+  @media(max-width:700px){ .related-grid{grid-template-columns:1fr;} }
+</style>
+</head>
+<body>
+  <div id="cur"></div>
+  <div id="ring"></div>
+  <canvas id="hearts-canvas"></canvas>
+  <nav id="main-nav">
+    <a href="index.html" class="nav-logo">Sutu &amp; Cupcake</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="travel.html">Travel</a></li>
+      <li><a href="life.html">Life</a></li>
+      <li><a href="about.html">About Us</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </nav>
+  <div class="mobile-menu" id="mobile-menu">
+    <button class="mobile-close" id="mobile-close">&#x2715;</button>
+    <a href="index.html">Home</a>
+    <a href="travel.html">Travel</a>
+    <a href="life.html">Life</a>
+    <a href="about.html">About Us</a>
+  </div>
+
+  <div class="progress-bar" id="progress"></div>
+
+  <div class="post-hero">
+    <div class="post-hero-meta">
+      <span class="tag rose">Travel</span>
+      <div class="pip s">S</div>
+      <span class="post-date">April 3, 2026 &middot; 4 min read</span>
+    </div>
+    <h1 class="post-title">That weekend we got lost in the hills and didn't mind at all</h1>
+    <div class="post-byline">
+      <div class="byline-av s">S</div>
+      Written by Sutu
+    </div>
+  </div>
+
+  <div class="post-cover">
+    <div class="post-cover-inner c3">&#127807;</div>
+  </div>
+
+  <article data-aos="fade-up">
+    <p>We had no plan. That was the plan &mdash; or the closest thing to one. A tank full of petrol, a half-charged phone with offline maps that turned out to be six months out of date, and each other. The kind of trip where you pack light and end up buying a fleece from a roadside stall anyway.</p>
+    <p>It started on a Friday evening, the sort where the week had been long enough that we both just looked at each other and said: let&rsquo;s go. No searching for hotels, no reading reviews. Just the road heading north and the vague idea that the hills would be cooler.</p>
+    <div class="pull-quote"><p>&ldquo;Somewhere between the second wrong turn and the roadside chai stall, it became one of those trips we&rsquo;ll talk about for years.&rdquo;</p></div>
+    <p>The first wrong turn happened about forty minutes out. I was navigating and, in my defence, the road did look like it went somewhere. It went somewhere &mdash; just not where we wanted. We ended up on a narrow track that slowly turned to mud and emptied us out in front of a man with three goats who looked at our car with total bewilderment.</p>
+    <div class="inline-img c3">&#9968;</div>
+    <h2>The chai stall that changed <em>everything</em></h2>
+    <p>We found it by smell. Wood smoke and something sweet. A small blue-painted structure with plastic chairs outside and a man who made chai like he had been doing it his entire life. We sat there for an hour and a half. Cupcake took about forty photos. I took one, of Cupcake taking photos, which is probably the better image.</p>
+    <p>By the time we left, the light had gone gold the way it only does in the hills in October. We found a guesthouse by asking at a dhaba. The room was small. The blankets smelled faintly of cedar. We slept better than we had in months.</p>
+    <h2>What getting lost actually feels like</h2>
+    <p>It&rsquo;s only unpleasant if you&rsquo;re in a hurry to be somewhere else. We weren&rsquo;t. Being lost was just another word for exploring. I think about that trip whenever things get too scheduled, too planned. The best weekend we&rsquo;ve had, and it started with two wrong turns and a dead phone battery.</p>
+  </article>
+
+  <div class="post-footer">
+    <div class="post-author">
+      <div class="author-av s">S</div>
+      <div class="author-info">
+        <strong>Sutu</strong>
+        <span>One half of Sutu &amp; Cupcake</span>
+      </div>
+    </div>
+    <a href="travel.html" class="back-link">&larr; All travel posts</a>
+  </div>
+
+  <div class="related" data-aos="fade-up">
+    <div class="sec-head">
+      <h2 class="sec-title">More stories</h2>
+      <div class="sec-line"></div>
+    </div>
+    <div class="related-grid">
+      <a href="post-hills.html" class="card">
+        <div class="card-img c3">&#127807;</div>
+        <div class="card-body"><div class="card-meta"><div class="pip s">S</div><span class="tag rose">Travel</span></div><h3 class="card-title">Lost in the hills and didn&rsquo;t mind at all</h3></div>
+      </a>
+      <a href="post-mornings.html" class="card">
+        <div class="card-img c6">&#127769;</div>
+        <div class="card-body"><div class="card-meta"><div class="pip c">C</div><span class="tag gold">Love</span></div><h3 class="card-title">A love letter to slow mornings together</h3></div>
+      </a>
+      <a href="about.html" class="card">
+        <div class="card-img c4" style="font-size:52px;">&#9829;</div>
+        <div class="card-body"><div class="card-meta"><span class="tag rose">About</span></div><h3 class="card-title">Who are Sutu &amp; Cupcake?</h3></div>
+      </a>
+    </div>
+  </div>
+
+  <footer>
+    <div>Made with <span class="footer-heart">&#9829;</span> by Sutu &amp; Cupcake &nbsp;&middot;&nbsp; 2026</div>
+    <ul class="footer-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="travel.html">Travel</a></li>
+      <li><a href="life.html">Life</a></li>
+      <li><a href="about.html">About Us</a></li>
+    </ul>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+  <script src="main.js"></script>
+<script>
+  window.addEventListener('scroll', function() {
+    var d = document.documentElement;
+    var pct = d.scrollTop / (d.scrollHeight - d.clientHeight) * 100;
+    document.getElementById('progress').style.width = pct + '%';
+  });
+</script>
+</body>
+</html>

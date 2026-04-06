@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About Us &mdash; Sutu &amp; Cupcake</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+<style>
+  .about-hero { position:relative; min-height:70vh; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:140px 28px 80px; z-index:1; background: radial-gradient(ellipse 60% 60% at 25% 50%, rgba(232,99,122,.12) 0%, transparent 65%), radial-gradient(ellipse 60% 60% at 75% 50%, rgba(232,201,122,.08) 0%, transparent 65%); }
+  .ah-label { font-size:11px; letter-spacing:.3em; text-transform:uppercase; color:var(--rose); margin-bottom:20px; opacity:0; animation:rise 1s .2s ease forwards; }
+  .ah-title { font-family:'Cormorant Garamond',serif; font-size:clamp(52px,10vw,88px); font-weight:400; line-height:1; opacity:0; animation:rise 1s .4s ease forwards; }
+  .ah-title em { font-style:italic; color:var(--blush); }
+  .ah-title .gd { color:var(--gold); }
+  .ah-heart { font-size:32px; display:block; margin:22px auto; animation:heartbeat 1.4s ease-in-out infinite, rise 1s .6s ease forwards; opacity:0; }
+  .ah-sub { font-size:15px; color:var(--muted); max-width:420px; line-height:1.9; opacity:0; animation:rise 1s .8s ease forwards; }
+  main { max-width:960px; margin:0 auto; padding:0 28px 120px; position:relative; z-index:1; }
+  .stats-row { display:grid; grid-template-columns:repeat(4,1fr); gap:20px; margin-bottom:80px; }
+  .stat-card { background:var(--surface); border-radius:8px; padding:28px 20px; text-align:center; border:1px solid var(--soft); transition:border-color .3s; }
+  .stat-card:hover { border-color:rgba(232,99,122,.3); }
+  .stat-num { font-family:'Cormorant Garamond',serif; font-size:48px; font-weight:400; color:var(--rose); line-height:1; }
+  .stat-label { font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--muted); margin-top:8px; }
+  .profiles { display:grid; grid-template-columns:1fr 1fr; gap:24px; margin-bottom:80px; }
+  .profile-card { background:var(--surface); border-radius:12px; overflow:hidden; border:1px solid var(--soft); transition:border-color .3s; }
+  .profile-card:hover { border-color:rgba(232,99,122,.3); }
+  .profile-img-area { aspect-ratio:4/3; display:flex; align-items:center; justify-content:center; }
+  .profile-initial { width:100px; height:100px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-family:'Cormorant Garamond',serif; font-size:48px; font-weight:600; border:2px solid; }
+  .pc-sutu .profile-img-area { background:linear-gradient(135deg,#2e1015,#1a0c12); }
+  .pc-sutu .profile-initial { background:rgba(232,99,122,.15); border-color:var(--rose); color:var(--blush); }
+  .pc-cupcake .profile-img-area { background:linear-gradient(135deg,#1a1a0c,#12180c); }
+  .pc-cupcake .profile-initial { background:rgba(232,201,122,.15); border-color:var(--gold); color:var(--gold); }
+  .profile-body { padding:28px 32px; }
+  .profile-name { font-family:'Cormorant Garamond',serif; font-size:32px; font-weight:400; margin-bottom:4px; font-style:italic; }
+  .pc-sutu .profile-name { color:var(--blush); }
+  .pc-cupcake .profile-name { color:var(--gold); }
+  .profile-role { font-size:11px; letter-spacing:.15em; text-transform:uppercase; color:var(--muted); margin-bottom:18px; }
+  .profile-bio { font-size:14px; color:var(--muted); line-height:1.9; margin-bottom:20px; }
+  .profile-tags { display:flex; flex-wrap:wrap; gap:8px; }
+  .ptag { font-size:10px; letter-spacing:.1em; text-transform:uppercase; padding:4px 12px; border-radius:20px; border:1px solid; }
+  .pc-sutu .ptag { border-color:rgba(232,99,122,.3); color:var(--rose); background:rgba(232,99,122,.08); }
+  .pc-cupcake .ptag { border-color:rgba(232,201,122,.25); color:var(--gold); background:rgba(232,201,122,.08); }
+  .story-section { margin-bottom:80px; }
+  .story-body { background:var(--surface); border-radius:12px; padding:52px 60px; border:1px solid var(--soft); position:relative; overflow:hidden; }
+  .story-body::before { content:'"'; position:absolute; right:32px; top:0; font-family:'Cormorant Garamond',serif; font-size:200px; line-height:1; color:rgba(232,99,122,.05); pointer-events:none; }
+  .story-body p { font-size:16px; color:rgba(253,240,243,.75); line-height:2; margin-bottom:24px; max-width:700px; }
+  .story-body p:last-child { margin-bottom:0; }
+  .story-body strong { color:var(--blush); font-weight:400; }
+  .tl-item { display:grid; grid-template-columns:100px 1fr; gap:32px; padding:28px 0; border-bottom:1px solid var(--soft); align-items:start; }
+  .tl-item:last-child { border-bottom:none; }
+  .tl-date { font-family:'Cormorant Garamond',serif; font-size:28px; font-style:italic; color:var(--rose); font-weight:400; line-height:1; }
+  .tl-date span { font-size:12px; display:block; color:var(--muted); font-style:normal; font-family:'Jost',sans-serif; margin-top:4px; }
+  .tl-text h4 { font-family:'Cormorant Garamond',serif; font-size:22px; font-weight:400; color:var(--cream); margin-bottom:8px; }
+  .tl-text p { font-size:14px; color:var(--muted); line-height:1.85; }
+  .tl-heart { color:var(--rose); }
+  @media(max-width:700px){ .profiles{grid-template-columns:1fr;} .story-body{padding:32px 24px;} .stats-row{grid-template-columns:repeat(2,1fr);} .tl-item{grid-template-columns:70px 1fr;gap:16px;} }
+</style>
+</head>
+<body>
+  <!-- CURSOR + CANVAS -->
+  <div id="cur"></div>
+  <div id="ring"></div>
+  <canvas id="hearts-canvas"></canvas>
+
+  <!-- NAV -->
+  <nav id="main-nav">
+    <a href="index.html" class="nav-logo">Sutu &amp; Cupcake</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="travel.html">Travel</a></li>
+      <li><a href="life.html">Life</a></li>
+      <li><a href="about.html">About Us</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- MOBILE MENU -->
+  <div class="mobile-menu" id="mobile-menu">
+    <button class="mobile-close" id="mobile-close">&#x2715;</button>
+    <a href="index.html">Home</a>
+    <a href="travel.html">Travel</a>
+    <a href="life.html">Life</a>
+    <a href="about.html">About Us</a>
+  </div>
+
+  <div class="about-hero">
+    <p class="ah-label">Two people, one blog</p>
+    <h1 class="ah-title"><em>Sutu</em> <span style="color:var(--muted);font-size:.45em;vertical-align:middle;">&amp;</span> <span class="gd">Cupcake</span></h1>
+    <span class="ah-heart">&#9829;</span>
+    <p class="ah-sub">This is us &mdash; the people behind every story, photo, and half-burnt recipe on this blog.</p>
+  </div>
+
+  <main>
+    <div class="stats-row" data-aos="fade-up">
+      <div class="stat-card"><div class="stat-num">6</div><div class="stat-label">Stories written</div></div>
+      <div class="stat-card"><div class="stat-num">5</div><div class="stat-label">Trips together</div></div>
+      <div class="stat-card"><div class="stat-num">&infin;</div><div class="stat-label">Cups of chai</div></div>
+      <div class="stat-card"><div class="stat-num">1</div><div class="stat-label">Little world</div></div>
+    </div>
+
+    <div class="sec-head" data-aos="fade-up">
+      <h2 class="sec-title">The writers</h2>
+      <div class="sec-line"></div>
+    </div>
+
+    <div class="profiles" data-aos="fade-up">
+      <div class="profile-card pc-sutu">
+        <div class="profile-img-area"><div class="profile-initial">S</div></div>
+        <div class="profile-body">
+          <div class="profile-name">Sutu</div>
+          <div class="profile-role">Writer &middot; Traveller &middot; Navigator (sort of)</div>
+          <p class="profile-bio">The one who usually suggests the trip and then takes exactly one photo the whole time. Writes about places, moments, and the feeling of being somewhere new with the right person.</p>
+          <div class="profile-tags"><span class="ptag">Travel</span><span class="ptag">Photography</span><span class="ptag">Life</span></div>
+        </div>
+      </div>
+      <div class="profile-card pc-cupcake">
+        <div class="profile-img-area"><div class="profile-initial">C</div></div>
+        <div class="profile-body">
+          <div class="profile-name">Cupcake</div>
+          <div class="profile-role">Writer &middot; Cook &middot; Chief Memory Keeper</div>
+          <p class="profile-bio">The one who notices details Sutu always misses. Writes about food, feelings, and the small ordinary things that turn out to be the most important ones when you look back.</p>
+          <div class="profile-tags"><span class="ptag">Food</span><span class="ptag">Thoughts</span><span class="ptag">Love</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="story-section">
+      <div class="sec-head" data-aos="fade-up"><h2 class="sec-title">Our story</h2><div class="sec-line"></div></div>
+      <div class="story-body" data-aos="fade-up">
+        <p>This blog started because <strong>Cupcake</strong> kept saying &ldquo;we should write this down&rdquo; every time something nice happened, and <strong>Sutu</strong> kept saying &ldquo;yeah, we should&rdquo; and then not doing it. Eventually Cupcake got tired of waiting.</p>
+        <p>We didn&rsquo;t set out to make something beautiful. We just wanted a place to keep things &mdash; the trips we take, the food we make, the conversations that feel important at 11pm. A little archive of us.</p>
+        <p>We write from Kharagpur, West Bengal, and occasionally from wherever our last bus ticket takes us. If you&rsquo;re reading this &mdash; hello, and thank you for being here in our little corner of the internet.</p>
+      </div>
+    </div>
+
+    <div class="sec-head" data-aos="fade-up"><h2 class="sec-title">Milestones</h2><div class="sec-line"></div></div>
+    <div data-aos="fade-up">
+      <div class="tl-item"><div class="tl-date">2024 <span>Year one</span></div><div class="tl-text"><h4>The beginning <span class="tl-heart">&#9829;</span></h4><p>Somewhere in 2024, two people started spending all their time together and decided that probably meant something. This is where the story starts.</p></div></div>
+      <div class="tl-item"><div class="tl-date">Jan <span>2025</span></div><div class="tl-text"><h4>First trip together</h4><p>A spontaneous weekend that went slightly wrong in the best possible way. The first of many adventures Sutu navigated badly and Cupcake made beautiful.</p></div></div>
+      <div class="tl-item"><div class="tl-date">Feb <span>2026</span></div><div class="tl-text"><h4>This blog is born <span class="tl-heart">&#9829;</span></h4><p>Cupcake got tired of waiting and finally built the thing. You&rsquo;re reading it right now.</p></div></div>
+      <div class="tl-item"><div class="tl-date">Now <span>2026</span></div><div class="tl-text"><h4>Still writing</h4><p>Six posts in, many more planned. The chai is still hot and the blog is very much alive.</p></div></div>
+    </div>
+  </main>
+
+  <footer>
+    <div>Made with <span class="footer-heart">&#9829;</span> by Sutu &amp; Cupcake &nbsp;&middot;&nbsp; 2026</div>
+    <ul class="footer-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="travel.html">Travel</a></li>
+      <li><a href="life.html">Life</a></li>
+      <li><a href="about.html">About Us</a></li>
+    </ul>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+  <script src="main.js"></script>
+
+</body>
+</html>

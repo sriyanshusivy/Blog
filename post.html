@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>That weekend we got lost in the hills — Our Little Corner</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream: #fdf6ee;
+      --warm: #f5e6d0;
+      --ink: #1a1208;
+      --muted: #7a6a55;
+      --accent: #c4622d;
+      --accent2: #8b4a6b;
+      --soft: #e8d5c0;
+    }
+
+    body {
+      background: var(--cream);
+      color: var(--ink);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+    }
+
+    /* ── NAV ── */
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 48px;
+      border-bottom: 1px solid var(--soft);
+    }
+
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 18px;
+      color: var(--ink);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 13px;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--accent); }
+
+    /* ── POST HERO ── */
+    .post-hero {
+      max-width: 760px;
+      margin: 64px auto 0;
+      padding: 0 24px;
+      text-align: center;
+    }
+
+    .post-hero-meta {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .tag {
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 2px;
+    }
+
+    .tag.orange { background: #f5dfc8; color: var(--accent); }
+    .tag.pink   { background: #e8c9d8; color: var(--accent2); }
+
+    .post-date { font-size: 12px; color: var(--muted); }
+
+    .post-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(32px, 6vw, 58px);
+      line-height: 1.15;
+      margin-bottom: 24px;
+      font-weight: 400;
+    }
+
+    .post-title em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .post-byline {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 48px;
+    }
+
+    .avatar-sm {
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Playfair Display', serif;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .avatar-sm.him { background: #f5dfc8; color: var(--accent); }
+
+    /* ── COVER IMAGE ── */
+    .cover-img {
+      max-width: 920px;
+      margin: 0 auto 72px;
+      padding: 0 24px;
+    }
+
+    .cover-img-inner {
+      width: 100%;
+      aspect-ratio: 16/7;
+      border-radius: 6px;
+      background: linear-gradient(135deg, #f5dfc8 0%, #e8c9d8 40%, #c8e4d8 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 72px;
+    }
+
+    /* ── ARTICLE BODY ── */
+    article {
+      max-width: 660px;
+      margin: 0 auto;
+      padding: 0 24px 100px;
+    }
+
+    article p {
+      font-size: 17px;
+      line-height: 1.9;
+      color: #3d2e1a;
+      margin-bottom: 28px;
+    }
+
+    article h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 26px;
+      font-weight: 400;
+      margin: 48px 0 20px;
+    }
+
+    article h2 em { font-style: italic; color: var(--accent2); }
+
+    .pull-quote {
+      border-left: 3px solid var(--accent2);
+      margin: 48px 0;
+      padding: 4px 0 4px 28px;
+    }
+
+    .pull-quote p {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      line-height: 1.55;
+      font-style: italic;
+      color: var(--ink);
+      margin: 0;
+    }
+
+    .inline-img {
+      width: 100%;
+      aspect-ratio: 3/2;
+      border-radius: 4px;
+      margin: 40px 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 56px;
+    }
+
+    .bg-a { background: linear-gradient(120deg, #fce4c8, #f5c9a0); }
+    .bg-b { background: linear-gradient(120deg, #c8e4d8, #a8cfc0); }
+
+    /* ── POST FOOTER ── */
+    .post-footer {
+      max-width: 660px;
+      margin: 0 auto;
+      padding: 40px 24px;
+      border-top: 1px solid var(--soft);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .post-footer-author {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .author-info strong {
+      display: block;
+      font-size: 14px;
+      font-weight: 500;
+      margin-bottom: 2px;
+    }
+
+    .author-info span {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .back-link {
+      font-size: 13px;
+      color: var(--accent);
+      text-decoration: none;
+      border-bottom: 1px solid currentColor;
+      padding-bottom: 2px;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      padding: 32px 24px;
+      border-top: 1px solid var(--soft);
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    footer span { color: var(--accent2); }
+
+    @media (max-width: 768px) {
+      nav { padding: 16px 20px; }
+      .nav-links { display: none; }
+      .post-footer { flex-direction: column; gap: 20px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html" class="nav-logo">our little corner</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="#">Travel</a></li>
+      <li><a href="#">Life</a></li>
+      <li><a href="#">About</a></li>
+    </ul>
+  </nav>
+
+  <div class="post-hero">
+    <div class="post-hero-meta">
+      <span class="tag orange">Travel</span>
+      <span class="post-date">April 3, 2026 · 5 min read</span>
+    </div>
+    <h1 class="post-title">That weekend we got lost<br/>in the hills and <em>didn't mind at all</em></h1>
+    <div class="post-byline">
+      <div class="avatar-sm him">H</div>
+      Written by Him · April 3, 2026
+    </div>
+  </div>
+
+  <div class="cover-img">
+    <div class="cover-img-inner">🌿</div>
+  </div>
+
+  <article>
+
+    <p>We had no plan. That was the plan, actually — or the closest thing to one. A tank full of petrol, a half-charged phone with offline maps that turned out to be six months out of date, and each other. The kind of trip where you pack light and end up buying a fleece from a roadside stall anyway.</p>
+
+    <p>It started on a Friday evening, the sort where the week had been long enough that we both just looked at each other and said, let's go. No searching for hotels, no reading reviews. Just the road heading north and the vague idea that the hills would be cooler.</p>
+
+    <div class="pull-quote">
+      <p>"Somewhere between the second wrong turn and the roadside chai stall, it became one of those trips we'll talk about for years."</p>
+    </div>
+
+    <p>The first wrong turn happened about forty minutes out of the city. I was navigating and, in my defence, the road did look like it went somewhere. It went somewhere — just not where we wanted. We ended up on a narrow track that slowly turned to mud and then emptied us out in front of a man with three goats who looked at our car with total bewilderment.</p>
+
+    <div class="inline-img bg-a">⛰️</div>
+
+    <h2>The chai stall that changed everything</h2>
+
+    <p>We found it by smell, honestly. Wood smoke and something sweet, and then a small blue painted structure with plastic chairs outside and a man who made chai like he had been doing it his entire life, which he probably had. We sat there for an hour and a half. We were the only customers. He didn't seem to mind.</p>
+
+    <p>By the time we left, the light had gone gold the way it only does in October in the hills, where the air is clean enough that the whole sky just saturates. She took about forty photos. I took one, of her taking photos, which is probably the better image.</p>
+
+    <div class="inline-img bg-b">🍃</div>
+
+    <h2>What getting lost actually feels like</h2>
+
+    <p>Here's the thing about being lost that nobody tells you: it's only unpleasant if you're in a hurry to be somewhere else. We weren't. We had nowhere to be until Sunday evening. So being lost was just another word for exploring, which sounds obvious when you write it down but feels like a revelation when you're living it.</p>
+
+    <p>We found a guesthouse by asking at a dhaba. The room was small and the blankets smelled faintly of cedar. The window looked out at nothing but trees and a strip of sky. We slept better than we had in months.</p>
+
+    <p>I think about that trip whenever things get too scheduled, too planned, too optimised. The best version of a weekend we've had, and it started with two wrong turns and a dead phone battery.</p>
+
+  </article>
+
+  <div class="post-footer">
+    <div class="post-footer-author">
+      <div class="avatar-sm him" style="width:44px;height:44px;font-size:18px;">H</div>
+      <div class="author-info">
+        <strong>Him</strong>
+        <span>Writes about travel, ordinary days, and getting lost on purpose</span>
+      </div>
+    </div>
+    <a href="index.html" class="back-link">← All posts</a>
+  </div>
+
+  <footer>
+    Made with <span>♥</span> — Our Little Corner · 2026
+  </footer>
+
+</body>
+</html>
